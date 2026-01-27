@@ -1,0 +1,24 @@
+# GetInfo 插件配置文件
+
+# 日志设置
+logging:
+  # 日志级别: NONE, MINIMAL, NORMAL, DEBUG
+  # NONE - 仅严重错误
+  # MINIMAL - 启动/关闭 + 错误 + 警告
+  # NORMAL - 重要操作 + 错误 + 警告
+  # DEBUG - 所有详细信息
+  level: NORMAL
+
+# 导出设置
+export:
+  # 导出文件保存路径
+  path: "plugins/GetInfo/exports/"
+
+# 功能设置
+features:
+  # 射线追踪最大距离（方块数）
+  ray-trace-distance: 10
+  
+  # 界面语言
+  # 支持: zh-CN (简体中文), en-US (英文), zh-TW (繁体中文)
+  language: "zh-CN"

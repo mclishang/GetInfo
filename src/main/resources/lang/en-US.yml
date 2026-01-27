@@ -1,0 +1,93 @@
+# GetInfo English Language File
+
+common:
+  prefix: "&e[GetInfo]&r"
+  no-permission: "&cYou don't have permission to execute this command"
+  click-to-copy: "&e[Click to Copy]"
+  copied: "&aCopied to clipboard"
+  unexpected-error: "&cAn unexpected error occurred, please check console logs"
+  console-only: "&cThis command can only be executed by players"
+
+item:
+  title: "&eItem Information"
+  no-item: "&cYou are not holding any item"
+  name: "&7Name: &f{name}"
+  namespace-id: "&7Namespace ID: &f{namespace_id}"
+  material: "&7Material: &f{material}"
+  amount: "&7Amount: &f{amount}"
+  durability: "&7Durability: &f{current}/{max}"
+  enchantments: "&7Enchantments: &f{enchantments}"
+  nbt: "&7NBT Data: &f{nbt}"
+  export-success: "&aItem information exported to: &f{path}"
+
+player:
+  title: "&ePlayer Information"
+  invalid-player: "&cPlayer {player} does not exist or is offline"
+  name: "&7Name: &f{name}"
+  uuid: "&7UUID: &f{uuid}"
+  level: "&7Level: &f{level}"
+  exp: "&7Experience: &f{exp}%"
+  health: "&7Health: &f{current}/{max}"
+  food: "&7Food: &f{food}"
+  armor: "&7Armor: &f{armor}"
+  gamemode: "&7Game Mode: &f{gamemode}"
+  world: "&7World: &f{world}"
+  location: "&7Location: &fX:{x} Y:{y} Z:{z}"
+  export-success: "&aPlayer information exported to: &f{path}"
+
+block:
+  title: "&eBlock Information"
+  no-block: "&cYou are not looking at any block"
+  air-block: "&cYou are looking at air"
+  no-nbt: "&7This block has no NBT data"
+  namespace-id: "&7Namespace ID: &f{namespace_id}"
+  material: "&7Material: &f{material}"
+  location: "&7Location: &fX:{x} Y:{y} Z:{z}"
+  world: "&7World: &f{world}"
+  nbt: "&7NBT Data: &f{nbt}"
+  export-success: "&aBlock information exported to: &f{path}"
+
+entity:
+  title: "&eEntity Information"
+  no-entity: "&cYou are not looking at any entity"
+  namespace-id: "&7Namespace ID: &f{namespace_id}"
+  type: "&7Type: &f{type}"
+  name: "&7Name: &f{name}"
+  custom-name: "&7Custom Name: &f{custom_name}"
+  health: "&7Health: &f{current}/{max}"
+  location: "&7Location: &fX:{x} Y:{y} Z:{z}"
+  world: "&7World: &f{world}"
+  uuid: "&7UUID: &f{uuid}"
+  nbt: "&7NBT Data: &f{nbt}"
+  export-success: "&aEntity information exported to: &f{path}"
+
+export:
+  error: "&cExport failed: {error}"
+  unknown-error: "Unknown error"
+
+help:
+  header: "&eGetInfo &f{version}"
+  command: "&7Command: &f/getinfo &8[...]"
+  parameters: "&7Parameters:"
+  item: "&8- &fitem"
+  item-desc: "&7  View held item information"
+  player: "&8- &fplayer <player>"
+  player-desc: "&7  View player information"
+  block: "&8- &fblock"
+  block-desc: "&7  View targeted block information"
+  entity: "&8- &fentity"
+  entity-desc: "&7  View targeted entity information"
+  help: "&8- &fhelp"
+  help-desc: "&7  Show this help message"
+  reload: "&8- &freload"
+  reload-desc: "&7  Reload configuration"
+  export-tip: "&7Tip: Add &f--export &7after command to export information to file"
+
+reload:
+  success: "&aConfiguration reloaded"
+
+gamemode:
+  survival: "Survival"
+  creative: "Creative"
+  adventure: "Adventure"
+  spectator: "Spectator"

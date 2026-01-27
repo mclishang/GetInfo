@@ -1,0 +1,59 @@
+name: GetInfo
+version: '1.0-SNAPSHOT'
+main: fun.lishang.mcplugin.getInfo.GetInfo
+api-version: '1.20'
+authors: [ mclishang ]
+description: 获取游戏内物品、玩家、方块和实体的详细信息，支持 NBT 数据查看和导出功能
+
+commands:
+  getinfo:
+    description: GetInfo 主命令 - 查看物品、玩家、方块和实体的详细信息
+    usage: |
+      /<command> item [--export] - 查看手持物品信息
+      /<command> player <玩家名> [--export] - 查看玩家信息
+      /<command> block [--export] - 查看指向的方块信息
+      /<command> entity [--export] - 查看指向的实体信息
+      /<command> help - 显示帮助信息
+      /<command> reload - 重载配置文件
+    aliases: [gi]
+
+permissions:
+  getinfo.admin:
+    description: 所有 GetInfo 权限的父权限
+    default: op
+    children:
+      getinfo.item: true
+      getinfo.player.self: true
+      getinfo.player.others: true
+      getinfo.block: true
+      getinfo.entity: true
+      getinfo.export: true
+      getinfo.reload: true
+  
+  getinfo.item:
+    description: 允许查看手持物品的详细信息和 NBT 数据
+    default: op
+  
+  getinfo.player.self:
+    description: 允许查看自己的玩家信息
+    default: true
+  
+  getinfo.player.others:
+    description: 允许查看其他玩家的详细信息
+    default: op
+  
+  getinfo.block:
+    description: 允许查看方块的详细信息和 NBT 数据
+    default: op
+  
+  getinfo.entity:
+    description: 允许查看实体的详细信息和 NBT 数据
+    default: op
+  
+  getinfo.export:
+    description: 允许将信息导出为 YAML 文件
+    default: op
+  
+  getinfo.reload:
+    description: 允许重载插件配置文件
+    default: op

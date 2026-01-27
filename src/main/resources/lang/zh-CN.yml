@@ -1,0 +1,93 @@
+# GetInfo 简体中文语言文件
+
+common:
+  prefix: "&e[GetInfo]&r"
+  no-permission: "&c你没有权限执行此命令"
+  click-to-copy: "&e[点击复制]"
+  copied: "&a已复制到剪贴板"
+  unexpected-error: "&c发生未预期的错误，请查看控制台日志"
+  console-only: "&c此命令只能由玩家执行"
+
+item:
+  title: "&e物品信息"
+  no-item: "&c你手上没有物品"
+  name: "&7名称: &f{name}"
+  namespace-id: "&7命名空间ID: &f{namespace_id}"
+  material: "&7材料类型: &f{material}"
+  amount: "&7数量: &f{amount}"
+  durability: "&7耐久度: &f{current}/{max}"
+  enchantments: "&7附魔: &f{enchantments}"
+  nbt: "&7NBT数据: &f{nbt}"
+  export-success: "&a物品信息已导出到: &f{path}"
+
+player:
+  title: "&e玩家信息"
+  invalid-player: "&c玩家 {player} 不存在或不在线"
+  name: "&7名称: &f{name}"
+  uuid: "&7UUID: &f{uuid}"
+  level: "&7经验等级: &f{level}"
+  exp: "&7经验百分比: &f{exp}%"
+  health: "&7血量: &f{current}/{max}"
+  food: "&7饥饿值: &f{food}"
+  armor: "&7护甲值: &f{armor}"
+  gamemode: "&7游戏模式: &f{gamemode}"
+  world: "&7所在世界: &f{world}"
+  location: "&7坐标: &fX:{x} Y:{y} Z:{z}"
+  export-success: "&a玩家信息已导出到: &f{path}"
+
+block:
+  title: "&e方块信息"
+  no-block: "&c你没有指向任何方块"
+  air-block: "&c你指向的是空气方块"
+  no-nbt: "&7此方块没有NBT数据"
+  namespace-id: "&7命名空间ID: &f{namespace_id}"
+  material: "&7材料类型: &f{material}"
+  location: "&7坐标: &fX:{x} Y:{y} Z:{z}"
+  world: "&7所在世界: &f{world}"
+  nbt: "&7NBT数据: &f{nbt}"
+  export-success: "&a方块信息已导出到: &f{path}"
+
+entity:
+  title: "&e实体信息"
+  no-entity: "&c你没有指向任何实体"
+  namespace-id: "&7命名空间ID: &f{namespace_id}"
+  type: "&7类型: &f{type}"
+  name: "&7名称: &f{name}"
+  custom-name: "&7自定义名称: &f{custom_name}"
+  health: "&7血量: &f{current}/{max}"
+  location: "&7坐标: &fX:{x} Y:{y} Z:{z}"
+  world: "&7所在世界: &f{world}"
+  uuid: "&7UUID: &f{uuid}"
+  nbt: "&7NBT数据: &f{nbt}"
+  export-success: "&a实体信息已导出到: &f{path}"
+
+export:
+  error: "&c导出失败: {error}"
+  unknown-error: "未知错误"
+
+help:
+  header: "&eGetInfo &f{version}"
+  command: "&7命令: &f/getinfo &8[...]"
+  parameters: "&7参数:"
+  item: "&8- &fitem"
+  item-desc: "&7  查看手持物品信息"
+  player: "&8- &fplayer <玩家名>"
+  player-desc: "&7  查看玩家信息"
+  block: "&8- &fblock"
+  block-desc: "&7  查看指向的方块信息"
+  entity: "&8- &fentity"
+  entity-desc: "&7  查看指向的实体信息"
+  help: "&8- &fhelp"
+  help-desc: "&7  显示此帮助信息"
+  reload: "&8- &freload"
+  reload-desc: "&7  重载配置文件"
+  export-tip: "&7提示: 在命令后添加 &f--export &7可导出信息到文件"
+
+reload:
+  success: "&a配置文件已重载"
+
+gamemode:
+  survival: "生存模式"
+  creative: "创造模式"
+  adventure: "冒险模式"
+  spectator: "旁观模式"
