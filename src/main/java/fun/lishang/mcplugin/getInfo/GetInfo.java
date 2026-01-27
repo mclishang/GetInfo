@@ -40,7 +40,6 @@ public final class GetInfo extends JavaPlugin {
             pluginLogger = new PluginLogger(getLogger(), configManager.getLogLevel());
             
             // 记录启动信息
-            pluginLogger.startup("=================================");
             pluginLogger.startup("GetInfo 插件正在启动...");
             pluginLogger.startup("版本: " + getDescription().getVersion());
             pluginLogger.startup("支持的 Minecraft 版本: 1.20.1 - 1.21.X");
@@ -58,7 +57,6 @@ public final class GetInfo extends JavaPlugin {
             pluginLogger.debug("命令已注册");
             
             pluginLogger.startup("GetInfo 插件启动完成！");
-            pluginLogger.startup("=================================");
             
         } catch (Exception e) {
             getLogger().severe("插件启动失败: " + e.getMessage());
@@ -70,10 +68,7 @@ public final class GetInfo extends JavaPlugin {
     @Override
     public void onDisable() {
         if (pluginLogger != null) {
-            pluginLogger.startup("=================================");
             pluginLogger.startup("GetInfo 插件正在关闭...");
-            pluginLogger.startup("感谢使用！");
-            pluginLogger.startup("=================================");
         }
     }
     

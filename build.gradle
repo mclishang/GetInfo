@@ -21,7 +21,7 @@ repositories {
 
 dependencies {
     compileOnly("org.spigotmc:spigot-api:1.20.1-R0.1-SNAPSHOT")
-    
+    implementation("org.bstats:bstats-bukkit:3.1.0")
     // NBT-API
     implementation 'de.tr7zw:item-nbt-api:2.15.5'
 }
@@ -32,7 +32,9 @@ tasks {
     }
     
     shadowJar {
-        relocate 'de.tr7zw.changeme.nbtapi', 'fun.lishang.mcplugin.getInfo.nbtapi'
+        configurations = [project.configurations.runtimeClasspath]
+        relocate 'org.bstats', "${project.group}.bstats"
+        relocate 'de.tr7zw.changeme.nbtapi', "${project.group}.nbtapi"
         archiveClassifier.set('')
     }
     
