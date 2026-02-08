@@ -1,6 +1,6 @@
 package fun.lishang.mcplugin.getInfo.info;
 
-import de.tr7zw.changeme.nbtapi.NBTItem;
+import de.tr7zw.nbtapi.NBTItem;
 import fun.lishang.mcplugin.getInfo.GetInfo;
 import fun.lishang.mcplugin.getInfo.i18n.LanguageManager;
 import org.bukkit.Material;

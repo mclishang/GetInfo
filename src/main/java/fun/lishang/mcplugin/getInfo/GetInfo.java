@@ -116,8 +116,8 @@ public final class GetInfo extends JavaPlugin {
      */
     private void checkNBTAPI() {
         try {
-            Class.forName("de.tr7zw.changeme.nbtapi.NBTItem");
-            pluginLogger.startup("NBT-API 已加载（内置版本）");
+            Class.forName("de.tr7zw.nbtapi.NBTItem");
+            pluginLogger.startup("NBT-API 已加载（外部依赖）");
         } catch (ClassNotFoundException e) {
             pluginLogger.warning("NBT-API 类未找到，某些功能可能无法正常工作");
         }

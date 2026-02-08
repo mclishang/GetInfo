@@ -4,6 +4,7 @@ main: fun.lishang.mcplugin.getInfo.GetInfo
 api-version: '1.20'
 authors: [ mclishang ]
 description: 获取游戏内物品、玩家、方块和实体的详细信息，支持 NBT 数据查看和导出功能
+softdepend: [NBTAPI]
 
 commands:
   getinfo:

@@ -1,6 +1,6 @@
 package fun.lishang.mcplugin.getInfo.info;
 
-import de.tr7zw.changeme.nbtapi.NBTTileEntity;
+import de.tr7zw.nbtapi.NBTTileEntity;
 import fun.lishang.mcplugin.getInfo.GetInfo;
 import fun.lishang.mcplugin.getInfo.i18n.LanguageManager;
 import fun.lishang.mcplugin.getInfo.util.FormatUtil;
