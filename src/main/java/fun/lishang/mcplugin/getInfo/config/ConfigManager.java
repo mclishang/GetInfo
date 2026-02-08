@@ -14,29 +14,21 @@ public class ConfigManager {
     private FileConfiguration config;
     private PluginLogger logger;
     
-    // 默认值
     private static final LogLevel DEFAULT_LOG_LEVEL = LogLevel.NORMAL;
     private static final String DEFAULT_EXPORT_PATH = "plugins/GetInfo/exports/";
     private static final int DEFAULT_RAY_TRACE_DISTANCE = 10;
     private static final String DEFAULT_LANGUAGE = "zh-CN";
+    private static final java.util.Set<String> SUPPORTED_LANGUAGES = 
+        java.util.Set.of("zh-CN", "en-US", "zh-TW");
     
     public ConfigManager(GetInfo plugin) {
         this.plugin = plugin;
     }
     
-    /**
-     * 设置日志记录器
-     * 
-     * @param logger 插件日志记录器
-     */
     public void setLogger(PluginLogger logger) {
         this.logger = logger;
     }
     
-    /**
-     * 加载配置文件
-     * 如果配置文件不存在，将创建默认配置文件
-     */
     public void loadConfig() {
         plugin.saveDefaultConfig();
         config = plugin.getConfig();
@@ -46,10 +38,6 @@ public class ConfigManager {
         }
     }
     
-    /**
-     * 重载配置文件
-     * 重新从磁盘读取配置文件
-     */
     public void reloadConfig() {
         plugin.reloadConfig();
         config = plugin.getConfig();
@@ -59,11 +47,6 @@ public class ConfigManager {
         }
     }
     
-    /**
-     * 获取日志级别
-     * 
-     * @return LogLevel 枚举值
-     */
     public LogLevel getLogLevel() {
         String levelStr = config.getString("logging.level", DEFAULT_LOG_LEVEL.name());
         
@@ -78,11 +61,6 @@ public class ConfigManager {
         }
     }
     
-    /**
-     * 获取导出路径
-     * 
-     * @return 导出文件的保存路径
-     */
     public String getExportPath() {
         String path = config.getString("export.path", DEFAULT_EXPORT_PATH);
         
@@ -96,11 +74,6 @@ public class ConfigManager {
         return path;
     }
     
-    /**
-     * 获取射线追踪距离
-     * 
-     * @return 射线追踪的最大距离（方块数）
-     */
     public int getRayTraceDistance() {
         int distance = config.getInt("features.ray-trace-distance", DEFAULT_RAY_TRACE_DISTANCE);
         
@@ -115,23 +88,10 @@ public class ConfigManager {
         return distance;
     }
     
-    /**
-     * 获取语言设置
-     * 
-     * @return 语言代码（zh-CN, en-US, zh-TW）
-     */
     public String getLanguage() {
         String language = config.getString("features.language", DEFAULT_LANGUAGE);
         
-        if (language == null || language.trim().isEmpty()) {
-            if (logger != null) {
-                logger.warning("配置文件中的语言设置无效，使用默认值: " + DEFAULT_LANGUAGE);
-            }
-            return DEFAULT_LANGUAGE;
-        }
-        
-        // 验证语言代码是否支持
-        if (!language.equals("zh-CN") && !language.equals("en-US") && !language.equals("zh-TW")) {
+        if (language == null || language.trim().isEmpty() || !SUPPORTED_LANGUAGES.contains(language)) {
             if (logger != null) {
                 logger.warning("不支持的语言: " + language + "，使用默认值: " + DEFAULT_LANGUAGE);
             }

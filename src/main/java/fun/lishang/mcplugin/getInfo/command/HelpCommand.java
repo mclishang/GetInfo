@@ -10,10 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * 帮助信息子命令
- * 遵循 MCPLUGIN 规范的命令界面样式
- */
 public class HelpCommand implements SubCommand {
     
     private final GetInfo plugin;
@@ -36,55 +32,42 @@ public class HelpCommand implements SubCommand {
     
     @Override
     public void execute(Player player, String[] args) {
-        // 获取插件版本
         String version = plugin.getDescription().getVersion();
         
-        // 创建占位符
         Map<String, String> versionPlaceholder = new HashMap<>();
         versionPlaceholder.put("version", version);
         
-        // 发送帮助信息（遵循 MCPLUGIN 规范）
         player.sendMessage("");
-        player.sendMessage(translateColor(lang.getMessage("help.header", versionPlaceholder)));
+        player.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getMessage("help.header", versionPlaceholder)));
         player.sendMessage("");
-        player.sendMessage(translateColor(lang.getMessage("help.command")));
-        player.sendMessage(translateColor(lang.getMessage("help.parameters")));
+        player.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getMessage("help.command")));
+        player.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getMessage("help.parameters")));
         
-        // 发送子命令列表
-        player.sendMessage(translateColor(lang.getMessage("help.item")));
-        player.sendMessage(translateColor(lang.getMessage("help.item-desc")));
+        player.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getMessage("help.item")));
+        player.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getMessage("help.item-desc")));
         
-        player.sendMessage(translateColor(lang.getMessage("help.player")));
-        player.sendMessage(translateColor(lang.getMessage("help.player-desc")));
+        player.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getMessage("help.player")));
+        player.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getMessage("help.player-desc")));
         
-        player.sendMessage(translateColor(lang.getMessage("help.block")));
-        player.sendMessage(translateColor(lang.getMessage("help.block-desc")));
+        player.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getMessage("help.block")));
+        player.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getMessage("help.block-desc")));
         
-        player.sendMessage(translateColor(lang.getMessage("help.entity")));
-        player.sendMessage(translateColor(lang.getMessage("help.entity-desc")));
+        player.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getMessage("help.entity")));
+        player.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getMessage("help.entity-desc")));
         
-        player.sendMessage(translateColor(lang.getMessage("help.help")));
-        player.sendMessage(translateColor(lang.getMessage("help.help-desc")));
+        player.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getMessage("help.help")));
+        player.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getMessage("help.help-desc")));
         
-        player.sendMessage(translateColor(lang.getMessage("help.reload")));
-        player.sendMessage(translateColor(lang.getMessage("help.reload-desc")));
+        player.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getMessage("help.reload")));
+        player.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getMessage("help.reload-desc")));
         
         player.sendMessage("");
-        player.sendMessage(translateColor(lang.getMessage("help.export-tip")));
+        player.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getMessage("help.export-tip")));
         player.sendMessage("");
     }
     
     @Override
     public List<String> tabComplete(Player player, String[] args) {
         return new ArrayList<>();
-    }
-    
-    /**
-     * 转换颜色代码
-     * @param message 消息
-     * @return 转换后的消息
-     */
-    private String translateColor(String message) {
-        return ChatColor.translateAlternateColorCodes('&', message);
     }
 }

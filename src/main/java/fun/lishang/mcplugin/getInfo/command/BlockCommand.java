@@ -12,9 +12,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * 方块信息查询子命令
- */
 public class BlockCommand implements SubCommand {
     
     private final GetInfo plugin;
@@ -44,7 +41,6 @@ public class BlockCommand implements SubCommand {
     @Override
     public void execute(Player player, String[] args) {
         try {
-            // 获取玩家指向的方块信息
             Map<String, Object> blockInfo = blockInfoGetter.getBlockInfo(player);
             
             if (blockInfo == null) {
@@ -52,44 +48,44 @@ public class BlockCommand implements SubCommand {
                 return;
             }
             
-            // 发送标题
             messageUtil.sendTitle(player, "block.title");
-            
-            // 发送信息
             messageUtil.sendInfoMessage(player, blockInfo);
             
-            // 检查是否需要导出
-            boolean shouldExport = false;
-            for (String arg : args) {
-                if ("--export".equalsIgnoreCase(arg)) {
-                    shouldExport = true;
-                    break;
-                }
-            }
-            
-            if (shouldExport) {
-                // 检查导出权限
-                if (!player.hasPermission("getinfo.export")) {
-                    messageUtil.sendError(player, "common.no-permission");
-                    return;
-                }
-                
-                String exportPath = exporter.export("block", blockInfo);
-                
-                if (exportPath != null) {
-                    Map<String, String> placeholders = new HashMap<>();
-                    placeholders.put("path", exportPath);
-                    messageUtil.sendError(player, "block.export-success", placeholders);
-                } else {
-                    Map<String, String> placeholders = new HashMap<>();
-                    placeholders.put("error", lang.getMessage("export.unknown-error"));
-                    messageUtil.sendError(player, "export.error", placeholders);
-                }
+            if (hasExportFlag(args)) {
+                handleExport(player, "block", blockInfo);
             }
         } catch (Exception e) {
             plugin.getPluginLogger().severe("执行方块信息命令时发生错误: " + e.getMessage());
             e.printStackTrace();
             messageUtil.sendError(player, "common.unexpected-error");
+        }
+    }
+    
+    private boolean hasExportFlag(String[] args) {
+        for (String arg : args) {
+            if ("--export".equalsIgnoreCase(arg)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    private void handleExport(Player player, String type, Map<String, Object> data) {
+        if (!player.hasPermission("getinfo.export")) {
+            messageUtil.sendError(player, "common.no-permission");
+            return;
+        }
+        
+        String exportPath = exporter.export(type, data);
+        
+        if (exportPath != null) {
+            Map<String, String> placeholders = new HashMap<>();
+            placeholders.put("path", exportPath);
+            messageUtil.sendError(player, type + ".export-success", placeholders);
+        } else {
+            Map<String, String> placeholders = new HashMap<>();
+            placeholders.put("error", lang.getMessage("export.unknown-error"));
+            messageUtil.sendError(player, "export.error", placeholders);
         }
     }
     

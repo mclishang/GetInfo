@@ -28,20 +28,10 @@ public class LanguageManager {
         this.plugin = plugin;
     }
     
-    /**
-     * 设置日志记录器
-     * 
-     * @param logger 插件日志记录器
-     */
     public void setLogger(PluginLogger logger) {
         this.logger = logger;
     }
     
-    /**
-     * 加载语言文件
-     * 
-     * @param language 语言代码（zh-CN, en-US, zh-TW）
-     */
     public void loadLanguage(String language) {
         if (language == null || language.trim().isEmpty()) {
             language = DEFAULT_LANGUAGE;
@@ -49,42 +39,31 @@ public class LanguageManager {
         
         YamlConfiguration config = loadLanguageFromJar(language);
         
-        if (config == null) {
+        if (config == null && !language.equals(DEFAULT_LANGUAGE)) {
             if (logger != null) {
                 logger.warning("无法加载语言文件: " + language + "，回退到默认语言: " + DEFAULT_LANGUAGE);
             }
-            
-            if (!language.equals(DEFAULT_LANGUAGE)) {
-                config = loadLanguageFromJar(DEFAULT_LANGUAGE);
+            config = loadLanguageFromJar(DEFAULT_LANGUAGE);
+            language = DEFAULT_LANGUAGE;
+        }
+        
+        if (config == null) {
+            if (logger != null) {
+                logger.severe("无法加载默认语言文件: " + DEFAULT_LANGUAGE);
             }
-            
-            if (config == null) {
-                if (logger != null) {
-                    logger.severe("无法加载默认语言文件: " + DEFAULT_LANGUAGE);
-                }
-                langConfig = new YamlConfiguration();
-                currentLanguage = DEFAULT_LANGUAGE;
-                return;
-            }
-            
+            langConfig = new YamlConfiguration();
             currentLanguage = DEFAULT_LANGUAGE;
-        } else {
-            currentLanguage = language;
+            return;
         }
         
         langConfig = config;
+        currentLanguage = language;
         
         if (logger != null) {
             logger.debug("已加载语言文件: " + currentLanguage);
         }
     }
     
-    /**
-     * 从 JAR 内部加载语言文件
-     * 
-     * @param language 语言代码
-     * @return YamlConfiguration 对象，如果加载失败则返回 null
-     */
     private YamlConfiguration loadLanguageFromJar(String language) {
         String fileName = LANG_PATH_PREFIX + language + LANG_FILE_SUFFIX;
         
@@ -112,12 +91,6 @@ public class LanguageManager {
         }
     }
     
-    /**
-     * 获取翻译消息
-     * 
-     * @param key 消息键（支持点号分隔的路径，如 "common.prefix"）
-     * @return 翻译后的消息，如果键不存在则返回键本身
-     */
     public String getMessage(String key) {
         if (langConfig == null) {
             return key;
@@ -135,13 +108,6 @@ public class LanguageManager {
         return translateColorCodes(message);
     }
     
-    /**
-     * 获取翻译消息（带占位符替换）
-     * 
-     * @param key 消息键
-     * @param placeholders 占位符映射（键为占位符名称，值为替换内容）
-     * @return 翻译并替换占位符后的消息
-     */
     public String getMessage(String key, Map<String, String> placeholders) {
         String message = getMessage(key);
         
@@ -150,33 +116,16 @@ public class LanguageManager {
         }
         
         for (Map.Entry<String, String> entry : placeholders.entrySet()) {
-            String placeholder = "{" + entry.getKey() + "}";
-            message = message.replace(placeholder, entry.getValue());
+            message = message.replace("{" + entry.getKey() + "}", entry.getValue());
         }
         
         return message;
     }
     
-    /**
-     * 转换颜色代码
-     * 将 & 符号转换为 Minecraft 颜色代码符号 §
-     * 
-     * @param text 原始文本
-     * @return 转换后的文本
-     */
     private String translateColorCodes(String text) {
-        if (text == null) {
-            return null;
-        }
-        
-        return ChatColor.translateAlternateColorCodes('&', text);
+        return text == null ? null : ChatColor.translateAlternateColorCodes('&', text);
     }
     
-    /**
-     * 获取当前语言代码
-     * 
-     * @return 当前使用的语言代码
-     */
     public String getCurrentLanguage() {
         return currentLanguage;
     }
