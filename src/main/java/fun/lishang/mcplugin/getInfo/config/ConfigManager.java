@@ -19,7 +19,7 @@ public class ConfigManager {
     private static final int DEFAULT_RAY_TRACE_DISTANCE = 10;
     private static final String DEFAULT_LANGUAGE = "zh-CN";
     private static final java.util.Set<String> SUPPORTED_LANGUAGES = 
-        java.util.Set.of("zh-CN", "en-US", "zh-TW");
+        new java.util.HashSet<>(java.util.Arrays.asList("zh-CN", "en-US", "zh-TW"));
     
     public ConfigManager(GetInfo plugin) {
         this.plugin = plugin;

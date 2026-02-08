@@ -11,12 +11,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class GetInfo extends JavaPlugin {
     
-    private static final String MIN_VERSION = "1.20.1";
-    private static final String MAX_VERSION = "1.21.X";
-    private static final int MIN_MAJOR = 1;
-    private static final int MIN_MINOR = 20;
-    private static final int MIN_PATCH = 1;
-    
     private ConfigManager configManager;
     private LanguageManager languageManager;
     private PluginLogger pluginLogger;
@@ -25,13 +19,6 @@ public final class GetInfo extends JavaPlugin {
     @Override
     public void onEnable() {
         try {
-            if (!checkServerVersion()) {
-                getLogger().severe("不支持的服务器版本！插件需要 Minecraft " + MIN_VERSION + " - " + MAX_VERSION);
-                getLogger().severe("当前版本: " + Bukkit.getVersion());
-                getServer().getPluginManager().disablePlugin(this);
-                return;
-            }
-            
             configManager = new ConfigManager(this);
             configManager.loadConfig();
             
@@ -42,7 +29,6 @@ public final class GetInfo extends JavaPlugin {
             
             pluginLogger.startup("GetInfo 插件正在启动...");
             pluginLogger.startup("版本: " + getDescription().getVersion());
-            pluginLogger.startup("支持的 Minecraft 版本: " + MIN_VERSION + " - " + MAX_VERSION);
             pluginLogger.startup("当前服务器版本: " + Bukkit.getVersion());
             
             checkNBTAPI();
@@ -66,34 +52,6 @@ public final class GetInfo extends JavaPlugin {
     public void onDisable() {
         if (pluginLogger != null) {
             pluginLogger.startup("GetInfo 插件正在关闭...");
-        }
-    }
-    
-    private boolean checkServerVersion() {
-        String version = Bukkit.getBukkitVersion().split("-")[0];
-        String[] parts = version.split("\\.");
-        
-        if (parts.length < 2) {
-            return false;
-        }
-        
-        try {
-            int major = Integer.parseInt(parts[0]);
-            int minor = Integer.parseInt(parts[1]);
-            int patch = parts.length > 2 ? Integer.parseInt(parts[2]) : 0;
-            
-            if (major != MIN_MAJOR) {
-                return false;
-            }
-            
-            if (minor == MIN_MINOR) {
-                return patch >= MIN_PATCH;
-            }
-            
-            return minor >= 21;
-        } catch (NumberFormatException e) {
-            getLogger().warning("无法解析版本号: " + version);
-            return false;
         }
     }
     

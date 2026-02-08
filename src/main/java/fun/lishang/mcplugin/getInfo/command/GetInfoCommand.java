@@ -9,6 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,10 +45,12 @@ public class GetInfoCommand implements CommandExecutor, TabCompleter {
     
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (!(sender instanceof Player player)) {
+        if (!(sender instanceof Player)) {
             messageUtil.sendError((Player) sender, "common.console-only");
             return true;
         }
+        
+        Player player = (Player) sender;
         
         if (args.length == 0) {
             executeSubCommand(player, "help", new String[0]);
@@ -88,9 +91,11 @@ public class GetInfoCommand implements CommandExecutor, TabCompleter {
     
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-        if (!(sender instanceof Player player)) {
-            return List.of();
+        if (!(sender instanceof Player)) {
+            return Collections.emptyList();
         }
+        
+        Player player = (Player) sender;
         
         if (args.length == 1) {
             return getSubCommandCompletions(player, args[0]);
@@ -100,7 +105,7 @@ public class GetInfoCommand implements CommandExecutor, TabCompleter {
             return getDelegatedCompletions(player, args);
         }
         
-        return List.of();
+        return Collections.emptyList();
     }
     
     private List<String> getSubCommandCompletions(Player player, String input) {
@@ -109,14 +114,14 @@ public class GetInfoCommand implements CommandExecutor, TabCompleter {
             .filter(cmd -> checkPermission(player, cmd))
             .map(SubCommand::getName)
             .filter(name -> name.toLowerCase().startsWith(lowerInput))
-            .toList();
+            .collect(java.util.stream.Collectors.toList());
     }
     
     private List<String> getDelegatedCompletions(Player player, String[] args) {
         SubCommand subCommand = subCommands.get(args[0].toLowerCase());
         
         if (subCommand == null || !checkPermission(player, subCommand)) {
-            return List.of();
+            return Collections.emptyList();
         }
         
         String[] subArgs = args.length > 1 ? 

@@ -22,8 +22,8 @@ repositories {
 dependencies {
     compileOnly("org.spigotmc:spigot-api:1.20.1-R0.1-SNAPSHOT")
     implementation("org.bstats:bstats-bukkit:3.1.0")
-    // NBT-API
-    compileOnly 'de.tr7zw:item-nbt-api-plugin:2.15.5'
+    // NBT-API - 支持 1.15 - 1.21.4
+    compileOnly 'de.tr7zw:item-nbt-api-plugin:2.13.2'
 }
 
 tasks {
@@ -46,7 +46,7 @@ tasks {
     }
 }
 
-def targetJavaVersion = 17
+def targetJavaVersion = 8
 java {
     def javaVersion = JavaVersion.toVersion(targetJavaVersion)
     sourceCompatibility = javaVersion
